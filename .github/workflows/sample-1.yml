@@ -1,0 +1,42 @@
+name: FGAN-Build-a-thon 2023 GitHub Actions workflow
+run-name: FGAN-Build-a-thon 2023 GitHub Actions
+on:
+  issues: 
+    types: [opened, edited]
+    
+jobs:
+  issue_opened_edited:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print issue details
+        run: |
+          echo Gotcha issue $LABELS
+        env:
+          LABELS: ${{ github.event.issue.labels[0].name }}   
+
+      - name: Checkout so that we have the python script in the container
+        uses: actions/checkout@v2
+        with:
+            repository: vrra/FGAN-Build-a-thon
+            token: ${{ secrets.MY_GITHUB_TOKEN }}
+
+      - name: View the github context
+        run: echo "$GITHUB_CONTEXT" >> ${{ vars.SCRIPTS_DIR }}/issue.out
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
+      - name: Push to Argilla
+        run: |
+          python -m pip install --upgrade pip
+          pip install argilla datasets
+          pip install huggingface_hub
+          python ${{ vars.SCRIPTS_DIR }}/PushRecordToArgilla-HF.py
+        env:
+            API_URL: ${{ vars.API_URL }}
+            API_KEY: ${{ vars.API_KEY }}
+            ARGILLA_WORKSPACE: ${{ vars.ARGILLA_WORKSPACE }}
+            MY_PUSH_TO_HF_HUB_TOKEN: ${{ vars.MY_PUSH_TO_HF_HUB_TOKEN }}      
+            SCRIPTS_DIR: ${{ vars.SCRIPTS_DIR }}  
+            DB_NAME: ${{ vars.DB_NAME }} 
+            HF_HUB_NAME: ${{ vars.HF_HUB_NAME }}
+            MY_ISSUE_LABEL: ${{ vars.MY_ISSUE_LABEL }}
