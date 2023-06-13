@@ -17,7 +17,7 @@ jobs:
       - name: Checkout so that we have the python script in the container
         uses: actions/checkout@v2
         with:
-            repository: vrra/FGAN-Build-a-thon
+            repository: vrra/Local-Language-for-Workflows
             token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: View the github context
