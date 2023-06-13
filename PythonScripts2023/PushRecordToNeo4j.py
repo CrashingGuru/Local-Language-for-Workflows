@@ -601,6 +601,7 @@ neo4j_uri= os.environ.get("NEO4J_URI")
 neo4j_user= os.environ.get("NEO4J_USER")
 neo4j_pass= os.environ.get("NEO4J_PASSWD")
 my_issue_label=os.environ.get("MY_ISSUE_LABEL")
+my_issue_json= os.environ.get("SCRIPTS_DIR") 
 
 
 print("neo4j_uri = "+neo4j_uri)
@@ -609,7 +610,7 @@ print("neo4j_user = "+neo4j_user)
 app = App(neo4j_uri, neo4j_user, neo4j_pass)
 
 
-issue_json= os.environ.get("SCRIPTS_DIR") + '/issue.out'
+issue_json= my_issue_json + '/issue.out'
 print("current working dir = "+os.getcwd())
 print("issue_json = "+issue_json)
 
