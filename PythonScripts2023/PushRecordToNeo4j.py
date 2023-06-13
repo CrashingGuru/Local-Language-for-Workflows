@@ -600,8 +600,38 @@ class App:
 neo4j_uri= os.environ.get("NEO4J_URI")
 neo4j_user= os.environ.get("NEO4J_USER")
 neo4j_pass= os.environ.get("NEO4J_PASSWD")
+my_issue_label=os.environ.get("MY_ISSUE_LABEL")
 
-print(neo4j_uri)
-print(neo4j_user)
+
+print("neo4j_uri = "+neo4j_uri)
+print("neo4j_user = "+neo4j_user)
 
 app = App(neo4j_uri, neo4j_user, neo4j_pass)
+
+
+issue_json= os.environ.get("SCRIPTS_DIR") + '/issue.out'
+print("current working dir = "+os.getcwd())
+print("issue_json = "+issue_json)
+
+with open(issue_json, 'r') as json_file:
+    json_object = json.load(json_file)
+
+issue_body=json_object["event"]["issue"]["body"]
+issue_body_list=issue_body.split("###")
+#print("issue_body_list= ", issue_body_list)
+
+issue_label=json_object["event"]["issue"]["labels"][0]["name"]
+print("issue_label= ", issue_label)
+
+if (my_issue_label == issue_label):
+    print("This is a survey submission! lets process it!")
+
+    #NOTE- we use max split as 1 to avoid false positive of double \n\n in the body.
+    bank_visit_count=issue_body_list[1].split("\n\n", 1)
+    bank_visit_count=bank_visit_count[1]
+
+    print("bank_visit_count= ", bank_visit_count)
+    print("bank_visit_count = ", bank_visit_count[0])
+
+else:
+    print("This is not a survey submission! lets forget it!")
