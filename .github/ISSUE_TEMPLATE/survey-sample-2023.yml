@@ -1,0 +1,22 @@
+name: Survey for Local language workflows 2023
+description: This github issue form is for Survey for Local language workflows 2023
+title: "[Survey for Local language workflows 2023]: "
+labels: ["Survey for Local language workflows 2023"]
+assignees:
+  - vrra
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to submit Survey for Local language workflows 2023!
+  - type: dropdown
+    id: prompt1
+    attributes:
+      label: आप महीने में कितनी बार बैंक जाते हैं?
+      multiple: false
+      options: 
+      - 1
+      - 2
+      - 3
+    validations:
+      required: true
