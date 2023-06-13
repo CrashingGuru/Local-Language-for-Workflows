@@ -24,3 +24,13 @@ jobs:
         run: echo "$GITHUB_CONTEXT" >> ${{ vars.SCRIPTS_DIR }}/issue.out
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+
+      - name: Push to Argilla
+        run: |
+          python -m pip install --upgrade pip
+          pip install neo4j
+          python ${{ vars.SCRIPTS_DIR }}/PushRecordToArgilla-HF.py
+        env:
+            NEO4J_URI: ${{ vars.NEO4J_URL }}
+            NEO4J_USER: ${{ vars.NEO4J_USER }}
+            NEO4J_PASSWD: ${{ vars.NEO4J_PASSWD }}
