@@ -8,6 +8,8 @@
 #expects magik file issue.out in the same dir as this py script.
 #Called from the workflow survey-sample-2023.yml
 
+#CAUTION: all variables used here 
+#needs to be passed in from actions-workflow.yml
 
 import os
 import json
@@ -25,6 +27,15 @@ print(sys.path)
 from neo4j import GraphDatabase
 import logging
 from neo4j.exceptions import ServiceUnavailable
+
+#CAUTION: all variables used here 
+#needs to be passed in from actions-workflow.yml
+neo4j_uri= os.environ.get("NEO4J_URI")
+neo4j_user= os.environ.get("NEO4J_USER")
+neo4j_pass= os.environ.get("NEO4J_PASSWD")
+my_issue_label=os.environ.get("MY_ISSUE_LABEL")
+my_issue_json= os.environ.get("SCRIPTS_DIR") 
+
 
 class App:
 
@@ -597,11 +608,6 @@ class App:
             raise
 
 
-neo4j_uri= os.environ.get("NEO4J_URI")
-neo4j_user= os.environ.get("NEO4J_USER")
-neo4j_pass= os.environ.get("NEO4J_PASSWD")
-my_issue_label=os.environ.get("MY_ISSUE_LABEL")
-my_issue_json= os.environ.get("SCRIPTS_DIR") 
 
 
 print("neo4j_uri = "+neo4j_uri)
