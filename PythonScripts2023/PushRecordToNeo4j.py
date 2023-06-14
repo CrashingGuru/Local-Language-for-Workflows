@@ -636,11 +636,15 @@ if (my_issue_label == issue_label):
     print("This is a survey submission! lets process it!")
 
     #NOTE- we use max split as 1 to avoid false positive of double \n\n in the body.
-    bank_visit_count=issue_body_list[1].split("\n\n", 1)
-    bank_visit_count=bank_visit_count[1]
 
-    print("bank_visit_count= ", bank_visit_count)
-    print("bank_visit_count = ", bank_visit_count[0])
+    bank_visit_count_prompt=issue_body_list[1].split("\n\n", 0)
+    bank_visit_count_prompt=bank_visit_count_prompt[1]
+
+    bank_visit_count_response=issue_body_list[1].split("\n\n", 1)
+    bank_visit_count_response=bank_visit_count_response[1]
+
+    print("bank_visit_count_prompt= ", bank_visit_count_prompt)
+    print("bank_visit_count_response = ", bank_visit_count_response)
 
 else:
     print("This is not a survey submission! lets forget it!")
