@@ -644,5 +644,8 @@ if (my_issue_label == issue_label):
     print("bank_visit_count_prompt= ", bank_visit_count_prompt)
     print("bank_visit_count_response = ", bank_visit_count_response)
 
+    app.create_actors_relationship_with_usecase(bank_visit_count_prompt, "response", 
+                                        bank_visit_count_response, "bank_visit_count_response")
+
 else:
     print("This is not a survey submission! lets forget it!")
