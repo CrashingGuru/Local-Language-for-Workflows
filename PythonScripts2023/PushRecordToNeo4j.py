@@ -628,8 +628,8 @@ issue_body_list=issue_body.split("###")
 print("issue_body_list= ", issue_body_list)
 
 issue_label=json_object["event"]["issue"]["labels"][0]["name"]
-print("issue_label= ", issue_label)]
-print("my issue_label= ", my_issue_label)]
+print("issue_label= ", issue_label)
+print("my issue_label= ", my_issue_label)
 
 
 if (my_issue_label == issue_label):
